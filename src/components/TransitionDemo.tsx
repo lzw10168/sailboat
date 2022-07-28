@@ -2,6 +2,7 @@ import React, { useState, startTransition, useTransition } from 'react'
 const Index = () => {
   const [value, setValue] = useState('')
   const [searchData, setSearchData] = useState<number[]>([])
+  // 这样用, 或者直接引入startTransition
   const [isPending, startTransition] = useTransition()
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)

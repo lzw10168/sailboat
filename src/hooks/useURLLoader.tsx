@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const useURLLoader = (url: string, deps: any[]) => {
+const useURLLoader = (url: string, deps: any[] = []) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown | string>(null);
@@ -16,11 +16,11 @@ const useURLLoader = (url: string, deps: any[]) => {
         setError(error);
       }
       setLoading(false);
-    }
+    };
     fetchData();
   }, deps);
 
   return { data, loading, error };
-}
+};
 
 export default useURLLoader;
