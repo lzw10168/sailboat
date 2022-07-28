@@ -1,51 +1,84 @@
-<<<<<<< HEAD
-# lookcool
-it's just a simple component library
-=======
-# Getting Started with Create React App
+# sailboat
+> it's just a simple component library
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 考虑的问题
 
-## Available Scripts
+- 代码结构
+- 格式化 - 代码校验
+- 样式解决方案
+- 组件需求分析和编码
+- 组件测试用例分析和编码
+- 代码打包输出和发布
+- CI/CD 文档生成...
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 项目结构
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```React JSX
+sailboat
+  README.md
+  node_modules/
+  package.json
+  tsconfig.json
+  src/
+      components/
+        Button/
+          button.tsx
+          button.test.tsx
+          style.scss
+      styles/
+        ...
+      index.tsx
 
-### `npm test`
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 格式化, 校验eslint + prettierrc
+  - eslint , prettierrc
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 样式解决方案
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> 全局变量, 依赖, 可重用性, 
 
-### `npm run eject`
+- Inline css
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    
+- CSS in JS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    
+- Sass/Less (选择用)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```React JSX
+style/
+  _variables.scss (各种变量以及可配置设置)
+  _reboot.scss (样式初始化 normalize.css)
+  _mixins.scss (全局mixins)
+  _function.scss (全局 functions)
+  index.scss (入口)
+components/
+  Button/
+    style.scss(组件单独样式)
 
-## Learn More
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 色彩体系
 
-To learn React, check out the [React documentation](https://reactjs.org/).
->>>>>>> master
+- 系统色板 - 基础色板  + 中性色板
+- 产品色板 - 品牌色  + 功能色板
+
+### 样式变量分类
+
+- 基础色彩系统
+- 字体系统
+- 表单
+- 按钮
+- 边框和阴影
+- 可配置开关
+
+### normalize.css
+
+  
