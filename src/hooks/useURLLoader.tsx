@@ -5,7 +5,6 @@ const useURLLoader = (url: string, deps: any[] = []) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<unknown | string>(null);
-  const a = 1;
   useEffect(() => {
     setLoading(true);
     const fetchData = async () => {

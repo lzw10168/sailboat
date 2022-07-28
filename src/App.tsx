@@ -1,6 +1,5 @@
 import { createContext, useState } from 'react';
-import Hello from './components/Hello';
-import Transition from './components/TransitionDemo';
+import Button, { ButtonType, ButtonSize } from './components/Button/button';
 interface ThemeProps {
   [key: string]: { color: string; backgroundColor: string };
 }
@@ -14,22 +13,26 @@ const themes: ThemeProps = {
     backgroundColor: '#222222'
   }
 };
-export const ThemeContext = createContext(themes.light);
 function App() {
   const [theme, setTheme] = useState(themes.light);
   return (
-    <ThemeContext.Provider value={theme}>
-      <div className="App">
-        <Hello msg="Hello World" />
-        <Transition />
-        <button onClick={() => setTheme(themes.dark)}>
-          Switch to dark theme
-        </button>
-        <button onClick={() => setTheme(themes.light)}>
-          Switch to light theme
-        </button>
-      </div>
-    </ThemeContext.Provider>
+    <div className="App">
+      <Button
+        onClick={e => {
+          console.log(e);
+        }}
+        size={ButtonSize.Large}
+        btnType={ButtonType.Primary}>
+        btn1-lg
+      </Button>
+      <Button size={ButtonSize.Large} btnType={ButtonType.Primary}>
+        btn1-lg
+      </Button>
+      <Button btnType={ButtonType.Link}>btn2-sm</Button>
+      <Button disabled btnType={ButtonType.Danger}>
+        btn3
+      </Button>
+    </div>
   );
 }
 

@@ -1,0 +1,13 @@
+// 导入的时候不需要加下划线, 加下划线是为了告诉不编译成一个单独的css文件, 只能被导入
+
+// config
+@import 'variables';
+
+// layout
+@import "reboot";
+
+// mixin
+@import "mixin";
+
+// button
+@import "../components/Button/style";

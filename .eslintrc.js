@@ -55,7 +55,9 @@ module.exports = {
     // 检查 Hook 的规则，不允许在if for里面使用
     "react-hooks/rules-of-hooks": [2],
     // 检查 effect 的依赖
-    "react-hooks/exhaustive-deps": 'warn'
+    "react-hooks/exhaustive-deps": 'warn',
     // 其余配置项自行添加
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": [1]
   }
 }
