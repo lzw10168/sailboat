@@ -8,7 +8,7 @@ export enum AlertType {
   Default = 'default'
 }
 
-export interface BaseAlertProps {
+export interface AlertProps {
   className?: string;
   type?: AlertType;
   title: string;
@@ -22,7 +22,7 @@ export interface BaseAlertProps {
 // 如果类中包含TransitionState.EXITED 则不会显示
 // function hasExited()
 
-const Alert = (props: BaseAlertProps) => {
+const Alert = (props: AlertProps) => {
   const {
     className,
     type,

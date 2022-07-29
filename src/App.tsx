@@ -29,12 +29,12 @@ function App() {
         }}>
         打开
       </button>
-      <button
+      <Button
         onClick={() => {
           setOpen(false);
         }}>
         关闭
-      </button>
+      </Button>
       <Alert
         type={AlertType.Default}
         title="this is a alert"
