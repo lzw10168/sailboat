@@ -1,4 +1,6 @@
-// 导入的时候不需要加下划线, 加下划线是为了告诉不编译成一个单独的css文件, 只能被导入
+// sass局部文件的文件名以下划线开头。这样，sass就不会在编译时单独编译这个文件输出css，而只把这个文件用作导入。
+// 当你@import一个局部文件时，还可以不写文件的全名，即省略文件名开头的下划线。
+// 举例来说，你想导入themes/_night-sky.scss这个局部文件里的变量，你只需在样式表中写@import "themes/night-sky";。
 
 // config
 @import 'variables';
@@ -11,3 +13,6 @@
 
 // button
 @import "../components/Button/style";
+
+// alert
+@import "../components/Alert/style";

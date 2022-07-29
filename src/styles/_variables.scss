@@ -10,7 +10,7 @@ $gray-800: #343a40 !default;
 $gray-900: #212529 !default;
 $black:    #000 !default;
 
-$blue:    #2979ff !default;
+$blue:    #0d6efd !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #d63384 !default;
@@ -168,7 +168,8 @@ $box-shadow-sm:               0 .125rem .25rem rgba($black, .075) !default;
 $box-shadow:                  0 .5rem 1rem rgba($black, .15) !default;
 $box-shadow-lg:               0 1rem 3rem rgba($black, .175) !default;
 $box-shadow-inset:            inset 0 1px 2px rgba($black, .075) !default;
-
+$box-padding-y:               .375rem !default;
+$box-padding-x:               .75rem !default;
 // 按钮
 // 按钮基本属性
 $btn-font-weight:             400;
@@ -294,7 +295,7 @@ $alert-title-font-weight:           $font-weight-bold !default;
 $alert-border-width:                $border-width !default;
 $alert-description-font-size:       $font-size-sm !default;
 $alert-description-top-margin:      .3rem !default;
-
+$alert-transition:                  all .3s ease-in-out;
 // Navs
 
 $nav-link-padding-y:                .5rem !default;

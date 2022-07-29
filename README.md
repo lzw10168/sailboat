@@ -15,7 +15,7 @@
 
 ### 项目结构
 
-```React JSX
+```JSX
 sailboat
   README.md
   node_modules/
@@ -52,7 +52,7 @@ sailboat
     
 - Sass/Less (选择用)
 
-```React JSX
+```JSX
 style/
   _variables.scss (各种变量以及可配置设置)
   _reboot.scss (样式初始化 normalize.css)

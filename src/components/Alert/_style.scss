@@ -1,0 +1,63 @@
+.alert {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 340px;
+  padding: $alert-padding-y $alert-padding-x;
+  margin-bottom: $alert-margin-bottom;
+  border-radius: $alert-border-radius;
+  transition: $alert-transition;
+  background-image: none;
+  border: $alert-border-width solid transparent;
+  box-shadow: $box-shadow;
+  color: $white;
+  opacity: 0;
+  &.entering {
+    opacity: 0;
+  }
+  &.entered {
+    opacity: 1;
+  }
+  &.exiting {
+    opacity: 0;
+  }
+  &.exited {
+    display: none;
+  }
+  .alert-container {
+    width: 320px;
+    .alert-title {
+      font-size: $font-size-base;
+      font-weight: $alert-title-font-weight;
+    }
+    .alert-desc {
+      font-size: $alert-description-font-size;
+      margin-top: $alert-description-top-margin;
+    }
+  }
+  .alert-close {
+    font-size: $font-size-base;
+    font-weight: $alert-title-font-weight;
+    padding: 0 .2em;
+    cursor: pointer;
+  }
+}
+.alert-closed {
+  opacity: 0;
+  pointer-events: none;
+
+}
+.alert-default {
+  background-color: $primary;
+}
+.alert-danger {
+  background-color: $danger;
+}
+.alert-success {
+  background-color: $success;
+}
+.alert-warning {
+  background-color: $warning;
+}

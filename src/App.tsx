@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import Alert, { AlertType } from './components/Alert/alert';
 import Button, { ButtonType, ButtonSize } from './components/Button/button';
 interface ThemeProps {
   [key: string]: { color: string; backgroundColor: string };
@@ -15,23 +16,35 @@ const themes: ThemeProps = {
 };
 function App() {
   const [theme, setTheme] = useState(themes.light);
+  const [open, setOpen] = useState(false);
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="App">
-      <Button
-        onClick={e => {
-          console.log(e);
-        }}
-        size={ButtonSize.Large}
-        btnType={ButtonType.Primary}>
-        btn1-lg
-      </Button>
-      <Button size={ButtonSize.Large} btnType={ButtonType.Primary}>
-        btn1-lg
-      </Button>
-      <Button btnType={ButtonType.Link}>btn2-sm</Button>
-      <Button disabled btnType={ButtonType.Danger}>
-        btn3
-      </Button>
+      {/* <Alert title="this is a alert" description="this is a alert" /> */}
+      <button
+        onClick={() => {
+          setOpen(true);
+        }}>
+        打开
+      </button>
+      <button
+        onClick={() => {
+          setOpen(false);
+        }}>
+        关闭
+      </button>
+      <Alert
+        type={AlertType.Default}
+        title="this is a alert"
+        description="this is a alert"
+        open={open}
+        onClose={onClose}
+      />
+
+      {/* <Alert title="this is a alert" description="this is a alert" /> */}
+      {/* <Alert title="this is a alert" description="this is a alert" /> */}
     </div>
   );
 }
