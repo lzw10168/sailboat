@@ -49,6 +49,6 @@ export const useTransition = (props: ITransitionProps) => {
         cb();
       }, autoHideDuration);
     }
-  }, [open, autoHideDuration]);
+  }, [open, autoHideDuration, interDuration, exitDuration, cb]);
   return { classes, show };
 };
