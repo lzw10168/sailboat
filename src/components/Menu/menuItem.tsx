@@ -5,7 +5,7 @@ import classNames from 'classnames';
 export interface IMenuItemProps {
   children: React.ReactNode;
   className?: string;
-  index?: number;
+  index?: string;
   disabled?: boolean;
 }
 const MenuItem = (props: IMenuItemProps) => {
@@ -19,7 +19,7 @@ const MenuItem = (props: IMenuItemProps) => {
     if (disabled) {
       return;
     }
-    context.onSelect(index as number);
+    context.onSelect(index as string);
   };
 
   return (

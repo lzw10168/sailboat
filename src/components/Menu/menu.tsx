@@ -1,47 +1,77 @@
 import * as React from 'react';
 
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { IMenuItemProps, menuItemDisplayName } from './menuItem';
+import { subMenuDisplayName } from './subMenu';
+import { activeBarDisplayName } from './activeBar';
+import ActiveBar from './activeBar';
 type Mode = 'vertical' | 'horizontal';
-type SelectCallback = (index: number) => void;
+type SelectCallback = (index: string) => void;
 export interface MenuProps {
   mode?: Mode;
   onSelect?: SelectCallback;
-  defaultIndex?: number;
+  defaultIndex?: string;
   className?: string;
   style?: React.CSSProperties;
   children?: React.ReactNode;
 }
 interface IContext {
   onSelect: SelectCallback;
-  activeIndex: number;
+  activeIndex: string;
+  menuDom: HTMLElement | null;
+  mode: Mode;
+  forceRenderCallback: () => void;
 }
 
 export const MenuContext = createContext<IContext>({
   onSelect: () => {},
-  activeIndex: 0
+  activeIndex: '0',
+  menuDom: null,
+  mode: 'vertical',
+  forceRenderCallback: () => {}
 });
 const Menu = (props: MenuProps) => {
   const { mode, onSelect, defaultIndex, className, style, children } = props;
-  const [activeIndex, setActiveIndex] = useState<number>(defaultIndex || 0);
+  const [activeIndex, setActiveIndex] = useState<string>(defaultIndex || '0');
+  const [forceRenderState, setForceRenderState] = useState(0);
+  const menuRef = useRef(null);
+  const [refState, setRefState] = useState(null);
   const classes = classNames('menu', className, {
     [`menu-${mode}`]: mode
   });
-  const handleClick = (index: number) => {
+  const handleClick = (index: string) => {
     setActiveIndex(index);
-    if (onSelect) onSelect(index);
+    if (onSelect) {
+      onSelect(index);
+    }
   };
-  const passedContext: IContext = {
+  let passedContext: IContext = {
     activeIndex: activeIndex,
-    onSelect: handleClick
+    onSelect: handleClick,
+    menuDom: menuRef.current,
+    mode: mode as Mode,
+    forceRenderCallback: () => {
+      setForceRenderState(forceRenderState + 1);
+    }
   };
+  useEffect(() => {
+    if (!menuRef.current) {
+      return;
+    }
+    setRefState(menuRef.current);
+  }, []);
+
   // 克隆子元素, 添加index, 判断类型是否是MenuItem
   const renderChildren = React.Children.map(children, (child, index) => {
     const childElement =
       child as React.FunctionComponentElement<IMenuItemProps>;
     const { displayName } = childElement.type;
-    if (displayName !== menuItemDisplayName) {
+    if (
+      displayName !== menuItemDisplayName &&
+      displayName !== subMenuDisplayName &&
+      displayName !== activeBarDisplayName
+    ) {
       console.error(
         'Warning: Menu has a child which is not a MenuItem component'
       );
@@ -50,14 +80,17 @@ const Menu = (props: MenuProps) => {
     return React.cloneElement(
       child as React.FunctionComponentElement<IMenuItemProps>,
       {
-        index: index
+        index: index.toString()
       }
     );
   });
   return (
-    <ul className={classes} style={style} data-testid="test-menu">
+    <ul ref={menuRef} className={classes} style={style} data-testid="test-menu">
       <MenuContext.Provider value={passedContext}>
-        {renderChildren}
+        <>
+          {renderChildren}
+          <ActiveBar forceRenderState={forceRenderState} />
+        </>
       </MenuContext.Provider>
     </ul>
   );

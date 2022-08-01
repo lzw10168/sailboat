@@ -3,6 +3,7 @@ import Alert, { AlertType } from './components/Alert/alert';
 import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
+import SubMenu from './components/Menu/subMenu';
 interface ThemeProps {
   [key: string]: { color: string; backgroundColor: string };
 }
@@ -26,12 +27,26 @@ function App() {
     <div className="App">
       <Menu mode="vertical">
         <MenuItem>背景</MenuItem>
-        <MenuItem disabled>图片</MenuItem>
+        <MenuItem>图片</MenuItem>
         <MenuItem>上海</MenuItem>
       </Menu>
       <Menu mode="horizontal">
         <MenuItem>背景</MenuItem>
-        <MenuItem disabled>图片</MenuItem>
+        <MenuItem>图片</MenuItem>
+        <MenuItem>上海</MenuItem>
+      </Menu>
+      <Menu mode="horizontal">
+        <SubMenu title="城市">
+          <MenuItem>背景</MenuItem>
+          <MenuItem>图片</MenuItem>
+        </SubMenu>
+        <MenuItem>上海</MenuItem>
+      </Menu>
+      <Menu mode="vertical">
+        <SubMenu title="城市2" open>
+          <MenuItem>背景</MenuItem>
+          <MenuItem disabled>图片</MenuItem>
+        </SubMenu>
         <MenuItem>上海</MenuItem>
       </Menu>
       <p>------------------------------------------------</p>
