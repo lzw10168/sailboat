@@ -33,6 +33,21 @@ const generateMenu = (props: MenuProps) => {
     </Menu>
   );
 };
+// 创建css文件, 放入head标签, 因为单侧中是没有css文件的, 所以要创建一个css , 让样式生效
+const createStyleFile = () => {
+  const cssFile: string = `
+    .submenu  {
+      display: none;
+    }
+    .submenu.is-opened {
+      display: block;
+    }
+  `;
+  const style = document.createElement('style');
+  style.type = 'text/css';
+  style.innerHTML = cssFile;
+  document.head.appendChild(style);
+};
 let wrapper: RenderResult,
   wrapper2: RenderResult,
   menuElement: HTMLElement,
@@ -47,6 +62,7 @@ describe('test Menu and menuItem component', () => {
     menuElement = wrapper.getByTestId('test-menu');
     activeElement = wrapper.getByText('active');
     disabledElement = wrapper.getByText('disabled');
+    createStyleFile();
   });
 
   it('should render correct Menu and MenuItem based on default props', () => {
@@ -77,7 +93,7 @@ describe('test Menu and menuItem component', () => {
   });
 
   it('should show dropdown items when hover on subMenu', async () => {
-    expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+    expect(wrapper.queryByText('drop1')).not.toBeVisible();
     const dropdownItem = wrapper.getByText('dropdown');
     fireEvent.mouseEnter(dropdownItem);
     await waitFor(
@@ -89,7 +105,7 @@ describe('test Menu and menuItem component', () => {
     fireEvent.mouseLeave(dropdownItem);
     await waitFor(
       () => {
-        expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+        expect(wrapper.queryByText('drop1')).not.toBeVisible();
       },
       { timeout: 120 }
     );
@@ -98,7 +114,7 @@ describe('test Menu and menuItem component', () => {
   it('should show dropdown items when click on subMenu', async () => {
     cleanup();
     const wrapper = render(generateMenu(testVerticalProps));
-    expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+    expect(wrapper.queryByText('drop1')).not.toBeVisible();
     const dropdownItem = wrapper.getByText('dropdown');
     fireEvent.click(dropdownItem);
     await waitFor(() => {
@@ -106,7 +122,7 @@ describe('test Menu and menuItem component', () => {
     });
     fireEvent.click(dropdownItem);
     await waitFor(() => {
-      expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+      expect(wrapper.queryByText('drop1')).not.toBeVisible();
     });
   });
 });

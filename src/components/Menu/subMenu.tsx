@@ -75,7 +75,7 @@ const SubMenu = (props: SubMenuProps) => {
             <MdKeyboardArrowDown />
           </div>
         </div>
-        {open ? renderChildren() : null}
+        {renderChildren()}
       </ul>
     </>
   );

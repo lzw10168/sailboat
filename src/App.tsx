@@ -4,6 +4,40 @@ import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menuItem';
 import SubMenu from './components/Menu/subMenu';
+import Tabs from './components/Tabs/tabs';
+import Tab from './components/Tabs/tab';
+import TabPanel from './components/Tabs/tabPanel';
+function BasicTabs() {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (newValue: number) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div>
+      <div>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example">
+          <Tab label="Item One" disabled />
+          <Tab label="Item Two" />
+          <Tab label="Item Three" />
+        </Tabs>
+      </div>
+      <TabPanel value={value} index={0}>
+        Item One
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Item Two
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Item Three
+      </TabPanel>
+    </div>
+  );
+}
 interface ThemeProps {
   [key: string]: { color: string; backgroundColor: string };
 }
@@ -25,25 +59,9 @@ function App() {
   };
   return (
     <div className="App">
+      <BasicTabs />
       <Menu mode="vertical">
-        <MenuItem>背景</MenuItem>
-        <MenuItem>图片</MenuItem>
-        <MenuItem>上海</MenuItem>
-      </Menu>
-      <Menu mode="horizontal">
-        <MenuItem>背景</MenuItem>
-        <MenuItem>图片</MenuItem>
-        <MenuItem>上海</MenuItem>
-      </Menu>
-      <Menu mode="horizontal">
-        <SubMenu title="城市">
-          <MenuItem>背景</MenuItem>
-          <MenuItem>图片</MenuItem>
-        </SubMenu>
-        <MenuItem>上海</MenuItem>
-      </Menu>
-      <Menu mode="vertical">
-        <SubMenu title="城市2" open>
+        <SubMenu title="城市2">
           <MenuItem>背景</MenuItem>
           <MenuItem disabled>图片</MenuItem>
         </SubMenu>

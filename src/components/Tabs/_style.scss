@@ -1,0 +1,70 @@
+.sail-tabs {
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 30px;
+  list-style: none;
+  border-bottom: $border-width solid $gray-300;
+  border-radius: $border-radius;
+  box-shadow: $menu-box-shadow;
+  >.sail-tabs-active_bar {
+    position: absolute;
+    background-color: $nav-tabs-link-active-color;
+    transition: all 0.3s ease-in-out;
+    border-radius: 4px;
+  }
+  >.sail-tab {
+    padding: $nav-link-padding-y $nav-link-padding-x;
+    cursor: pointer;
+    transition: $transition;
+    &:hover, &:focus {
+      text-decoration: none;
+    }
+    &.is-disabled {
+      color: $nav-link-disabled-color;
+      pointer-events: none;
+      cursor: none;
+    }
+    &:hover {
+      color: $nav-tabs-link-hover-color;
+    }
+    &.is-active{
+      color: $nav-tabs-link-active-color;
+      background-color: $nav-tabs-link-active-bg;
+
+    }
+  }
+}
+.sail-tabs {
+  padding-bottom: 2px;
+
+  >.sail-tabs-active_bar {
+    bottom: 0;
+    left: 0;
+    height: $nav-tabs-active-border-width;
+
+  }
+}
+.sail-tabs_vertical {
+  flex-direction: column;
+  border-bottom: 0px;
+  margin: 10px 20px;
+  border-right: $nav-tabs-border-width solid $nav-tabs-border-color;
+  padding-left: 2px;
+  box-shadow: none;
+  >.sail-tabs-active_bar {
+    top: 0;
+    left: 0;
+    width: $nav-tabs-active-border-width;
+  }
+  >.sail-tab {
+    &:hover {
+      border-bottom: 0px;
+      
+    }
+    &.is-active {
+      border-bottom: 0px;
+    }
+  }
+}

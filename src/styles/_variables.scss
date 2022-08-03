@@ -83,6 +83,7 @@ $link-hover-decoration:                   underline !default;
 $body-bg:                   $white !default;
 $body-color:                $gray-900 !default;
 $body-text-align:           null !default;
+$transition:              all .15s ease-in-out, border-color .15s ease-in-out !default;
 
 // Spacing
 $spacer: 1rem !default;
@@ -311,3 +312,4 @@ $nav-tabs-link-active-color:        $primary !default;
 $nav-tabs-link-active-bg:           $body-bg !default;
 $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
 $nav-tabs-content-margin:           1rem !default;
+$nav-tabs-active-border-width: 3px !default;

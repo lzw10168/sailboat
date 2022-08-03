@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import classNames from 'classnames';
-import { MenuContext } from './menu';
+import { TabsContext } from './tabs';
 export const activeBarDisplayName = 'ActiveBar';
 interface IProps {
   forceRenderState: number;
 }
 const ActiveBar = (props: IProps) => {
-  const context = useContext(MenuContext);
-  const { mode, activeIndex, menuDom } = context;
-  const readIndex = activeIndex.split('-')[0];
+  const context = useContext(TabsContext);
+  const { mode, activeIndex, tabsDom } = context;
   const [style, setStyle] = useState({});
   useEffect(() => {
-    if (!menuDom) {
+    if (!tabsDom) {
       return;
     }
-    const activeDom = menuDom.childNodes[Number(readIndex)] as HTMLElement;
+    const activeDom = tabsDom.childNodes[Number(activeIndex)] as HTMLElement;
     if (mode === 'horizontal') {
       const width = activeDom?.clientWidth + 'px';
       const left = activeDom?.offsetLeft + 'px';
@@ -26,12 +24,12 @@ const ActiveBar = (props: IProps) => {
       const style = { height, top };
       setStyle(style);
     }
-  }, [context.activeIndex, props.forceRenderState, menuDom]);
-  if (!menuDom) {
-    return <div className="menu-active_bar"></div>;
+  }, [activeIndex, props.forceRenderState, tabsDom]);
+  if (!tabsDom) {
+    return <div className="sail-tabs-active_bar"></div>;
   }
 
-  return <div style={style} className="menu-active_bar"></div>;
+  return <div style={style} className="sail-tabs-active_bar"></div>;
 };
 ActiveBar.displayName = activeBarDisplayName;
 export default ActiveBar;
