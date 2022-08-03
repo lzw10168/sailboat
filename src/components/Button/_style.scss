@@ -71,6 +71,7 @@
   }
   &:disabled,
   &.disabled {
+    cursor: none;
     color: $btn-link-disabled-color;
     pointer-events: none;
   }

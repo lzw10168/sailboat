@@ -66,7 +66,7 @@ const Menu = (props: MenuProps) => {
   const renderChildren = React.Children.map(children, (child, index) => {
     const childElement =
       child as React.FunctionComponentElement<IMenuItemProps>;
-    const { displayName } = childElement.type;
+    const displayName = childElement.type.displayName;
     if (
       displayName !== menuItemDisplayName &&
       displayName !== subMenuDisplayName &&

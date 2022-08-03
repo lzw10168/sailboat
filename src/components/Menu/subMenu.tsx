@@ -50,6 +50,9 @@ const SubMenu = (props: SubMenuProps) => {
         }
       : {};
   const renderChildren = () => {
+    const classes = classNames('submenu', {
+      'is-opened': open
+    });
     const childrenComponent = React.Children.map(children, (child, _index) => {
       const childElement =
         child as React.FunctionComponentElement<IMenuItemProps>;
@@ -61,11 +64,11 @@ const SubMenu = (props: SubMenuProps) => {
         console.error('Warning: SubMenu has a child which is not a menu item');
       }
     });
-    return <div className="submenu">{childrenComponent}</div>;
+    return <div className={classes}>{childrenComponent}</div>;
   };
   return (
     <>
-      <li key={index} className={classes} {...hoverEvents}>
+      <ul key={index} className={classes} {...hoverEvents}>
         <div className="submenu-title" {...clickEvents}>
           {title}
           <div className="arrow-icon">
@@ -73,7 +76,7 @@ const SubMenu = (props: SubMenuProps) => {
           </div>
         </div>
         {open ? renderChildren() : null}
-      </li>
+      </ul>
     </>
   );
 };
@@ -81,4 +84,6 @@ SubMenu.defaultProps = {
   open: false
 };
 SubMenu.displayName = subMenuDisplayName;
-export default SubMenu;
+const exportMenu = React.memo(SubMenu);
+exportMenu.displayName = subMenuDisplayName;
+export default exportMenu;

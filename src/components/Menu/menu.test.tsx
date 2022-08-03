@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react';
 import Menu, { MenuProps } from './menu';
 import MenuItem from './menuItem';
-
+import SubMenu from './subMenu';
 const testProps: MenuProps = {
   defaultIndex: '0',
   onSelect: jest.fn(),
@@ -25,6 +25,11 @@ const generateMenu = (props: MenuProps) => {
       <MenuItem>active</MenuItem>
       <MenuItem disabled>disabled</MenuItem>
       <MenuItem>xyz</MenuItem>
+      <MenuItem>x1yz</MenuItem>
+      <SubMenu title="dropdown">
+        <MenuItem>drop1</MenuItem>
+        <MenuItem>drop2</MenuItem>
+      </SubMenu>
     </Menu>
   );
 };
@@ -47,7 +52,7 @@ describe('test Menu and menuItem component', () => {
   it('should render correct Menu and MenuItem based on default props', () => {
     expect(menuElement).toBeInTheDocument();
     expect(menuElement).toHaveClass('menu test');
-    expect(menuElement.getElementsByTagName('li').length).toEqual(3);
+    expect(menuElement.querySelectorAll('ul').length).toEqual(1);
     expect(activeElement).toHaveClass('menu-item is-active');
     expect(disabledElement).toHaveClass('menu-item is-disabled');
   });
@@ -69,5 +74,39 @@ describe('test Menu and menuItem component', () => {
     const wrapper = render(generateMenu(testVerticalProps));
     const menuElement = wrapper.getByTestId('test-menu');
     expect(menuElement).toHaveClass('menu-vertical');
+  });
+
+  it('should show dropdown items when hover on subMenu', async () => {
+    expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+    const dropdownItem = wrapper.getByText('dropdown');
+    fireEvent.mouseEnter(dropdownItem);
+    await waitFor(
+      () => {
+        expect(wrapper.queryByText('drop1')).toBeVisible();
+      },
+      { timeout: 120 }
+    );
+    fireEvent.mouseLeave(dropdownItem);
+    await waitFor(
+      () => {
+        expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+      },
+      { timeout: 120 }
+    );
+  });
+
+  it('should show dropdown items when click on subMenu', async () => {
+    cleanup();
+    const wrapper = render(generateMenu(testVerticalProps));
+    expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+    const dropdownItem = wrapper.getByText('dropdown');
+    fireEvent.click(dropdownItem);
+    await waitFor(() => {
+      expect(wrapper.queryByText('drop1')).toBeVisible();
+    });
+    fireEvent.click(dropdownItem);
+    await waitFor(() => {
+      expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+    });
   });
 });

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useTransition, TransitionState } from './hooks';
+import { useTransition } from './hooks';
 
 export enum AlertType {
   Success = 'success',

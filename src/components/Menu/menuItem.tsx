@@ -1,6 +1,7 @@
 import { MenuContext } from './menu';
 import { useContext } from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
 export interface IMenuItemProps {
   children: React.ReactNode;
@@ -30,4 +31,8 @@ const MenuItem = (props: IMenuItemProps) => {
 };
 export const menuItemDisplayName = 'MenuItem';
 MenuItem.displayName = menuItemDisplayName;
-export default MenuItem;
+const exportMenuItem = React.memo(MenuItem);
+exportMenuItem.displayName = menuItemDisplayName;
+
+export default exportMenuItem;
+// export default React.memo(MenuItem);

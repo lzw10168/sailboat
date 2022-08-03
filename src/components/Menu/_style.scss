@@ -11,6 +11,7 @@
     position: absolute;
     background-color: $menu-item-active-color;
     transition: all 0.3s ease-in-out;
+    border-radius: 4px;
   }
   >.menu-item {
     padding: $menu-item-padding-y $menu-item-padding-x;
@@ -22,7 +23,7 @@
     &.is-disabled {
       color: $menu-item-disabled-color;
       pointer-events: none;
-      cursor: default;
+      cursor: none;
     }
     &:hover {
       color: $menu-item-active-color;
@@ -60,11 +61,11 @@
     }
   }
   .submenu {
-    //display: none;
+    display: none;
     list-style:none;
     padding-left: 0;
     white-space: nowrap;
-    //transition: $menu-transition;
+    transition: $menu-transition;
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
@@ -76,12 +77,12 @@
       &.is-disabled {
         color: $menu-item-disabled-color;
         pointer-events: none;
-        cursor: default;
+        cursor: none;
       }
     }
   }
-  .submenu.menu-opened {
-    //display: block;
+  .submenu.is-opened {
+    display: block;
   }
 }
 .menu-horizontal {

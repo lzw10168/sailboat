@@ -6,7 +6,6 @@ interface IProps {
   forceRenderState: number;
 }
 const ActiveBar = (props: IProps) => {
-  console.log('render');
   const context = useContext(MenuContext);
   const { mode, activeIndex, menuDom } = context;
   const readIndex = activeIndex.split('-')[0];
@@ -27,7 +26,7 @@ const ActiveBar = (props: IProps) => {
       const style = { height, top };
       setStyle(style);
     }
-  }, [context.activeIndex, props.forceRenderState]);
+  }, [context.activeIndex, props.forceRenderState, menuDom]);
   if (!menuDom) {
     return <div className="menu-active_bar"></div>;
   }
