@@ -19,6 +19,8 @@ function BasicTabs() {
       <div>
         <Tabs
           value={value}
+          type="card"
+          mode="vertical"
           onChange={handleChange}
           aria-label="basic tabs example">
           <Tab label="Item One" disabled />
