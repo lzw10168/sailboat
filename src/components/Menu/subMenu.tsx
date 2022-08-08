@@ -2,7 +2,8 @@ import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import { MenuContext } from './menu';
 import { IMenuItemProps, menuItemDisplayName } from './menuItem';
-import { MdKeyboardArrowDown } from 'react-icons/md';
+import Icon from '../Icon/icon';
+import Transition from '../Transition';
 import ActiveBar from './activeBar';
 export const subMenuDisplayName = 'SubMenu';
 export interface SubMenuProps {
@@ -64,7 +65,11 @@ const SubMenu = (props: SubMenuProps) => {
         console.error('Warning: SubMenu has a child which is not a menu item');
       }
     });
-    return <div className={classes}>{childrenComponent}</div>;
+    return (
+      <Transition animation="zoom-in-top" timeout={300} in={open}>
+        <div className={classes}>{childrenComponent}</div>
+      </Transition>
+    );
   };
   return (
     <>
@@ -72,7 +77,8 @@ const SubMenu = (props: SubMenuProps) => {
         <div className="submenu-title" {...clickEvents}>
           {title}
           <div className="arrow-icon">
-            <MdKeyboardArrowDown />
+            <Icon icon="angle-down" />
+            {/* <MdKeyboardArrowDown /> */}
           </div>
         </div>
         {renderChildren()}

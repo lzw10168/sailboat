@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import { useTransition } from './hooks';
-
+// import { useTransition } from './hooks';
+import Transition from '../Transition';
+import Icon from '../Icon/icon';
 export enum AlertType {
   Success = 'success',
   Danger = 'danger',
@@ -41,28 +42,20 @@ const Alert = (props: AlertProps) => {
     e.preventDefault();
     onClose();
   };
-  const { classes: transitionClass, show } = useTransition({
-    open,
-    autoHideDuration: autoHideDuration as number,
-    cb: onClose
-  });
-  const classes = classNames(baseClasses, transitionClass);
   return (
-    <>
-      {show && (
-        <div className={classes}>
-          <div className="alert-container">
-            <div className="alert-title">{title}</div>
-            {description && <div className="alert-desc">{description}</div>}
-          </div>
-          {showCloseIcon && (
-            <div className="alert-close" onClick={handleClose}>
-              x
-            </div>
-          )}
+    <Transition in={open} animation="zoom-in-top" timeout={300}>
+      <div className={baseClasses}>
+        <div className="alert-container">
+          <div className="alert-title">{title}</div>
+          {description && <div className="alert-desc">{description}</div>}
         </div>
-      )}
-    </>
+        {showCloseIcon && (
+          <div className="alert-close" onClick={handleClose}>
+            <Icon icon="close" />
+          </div>
+        )}
+      </div>
+    </Transition>
   );
 };
 

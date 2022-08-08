@@ -85,7 +85,7 @@ const Menu = (props: MenuProps) => {
     );
   });
   return (
-    <ul ref={menuRef} className={classes} style={style} data-testid="test-tabs">
+    <ul ref={menuRef} className={classes} style={style} data-testid="test-menu">
       <MenuContext.Provider value={passedContext}>
         <>
           {renderChildren}

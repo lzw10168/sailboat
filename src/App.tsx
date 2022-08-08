@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+
 import Alert, { AlertType } from './components/Alert/alert';
 import Button, { ButtonType, ButtonSize } from './components/Button/button';
 import Menu from './components/Menu/menu';
@@ -7,6 +8,7 @@ import SubMenu from './components/Menu/subMenu';
 import Tabs from './components/Tabs/tabs';
 import Tab from './components/Tabs/tab';
 import TabPanel from './components/Tabs/tabPanel';
+import Icon from './components/Icon/icon';
 function BasicTabs() {
   const [value, setValue] = useState(0);
 
@@ -62,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <BasicTabs />
-      <Menu mode="vertical">
+      <Menu>
         <SubMenu title="城市2">
           <MenuItem>背景</MenuItem>
           <MenuItem disabled>图片</MenuItem>
@@ -90,7 +92,7 @@ function App() {
         open={open}
         onClose={onClose}
       />
-
+      <Icon icon="coffee" theme="primary" />
       {/* <Alert title="this is a alert" description="this is a alert" /> */}
       {/* <Alert title="this is a alert" description="this is a alert" /> */}
     </div>

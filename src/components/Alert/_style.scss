@@ -8,24 +8,24 @@
   padding: $alert-padding-y $alert-padding-x;
   margin-bottom: $alert-margin-bottom;
   border-radius: $alert-border-radius;
-  transition: $alert-transition;
+  // transition: $alert-transition;
   background-image: none;
   border: $alert-border-width solid transparent;
   box-shadow: $box-shadow;
   color: $white;
-  opacity: 0;
-  &.entering {
-    opacity: 0;
-  }
-  &.entered {
-    opacity: 1;
-  }
-  &.exiting {
-    opacity: 0;
-  }
-  &.exited {
-    display: none;
-  }
+  // opacity: 0;
+  // &.entering {
+  //   opacity: 0;
+  // }
+  // &.entered {
+  //   opacity: 1;
+  // }
+  // &.exiting {
+  //   opacity: 0;
+  // }
+  // &.exited {
+  //   display: none;
+  // }
   .alert-container {
     width: 320px;
     .alert-title {

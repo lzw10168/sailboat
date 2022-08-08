@@ -45,7 +45,7 @@
     }
     &:hover {
       .arrow-icon {
-        transform: rotate(180deg);
+        transform: rotate(-180deg);
       }
     }
     
@@ -61,7 +61,7 @@
     }
   }
   .submenu {
-    display: none;
+    display: block;
     list-style:none;
     padding-left: 0;
     white-space: nowrap;
@@ -81,9 +81,9 @@
       }
     }
   }
-  .submenu.is-opened {
-    display: block;
-  }
+  // .submenu.is-opened {
+  //   display: block;
+  // }
 }
 .menu-horizontal {
   padding-bottom: 2px;

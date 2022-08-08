@@ -2,6 +2,10 @@ import React from 'react';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
+
 import './styles/index.scss';
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
@@ -9,9 +13,9 @@ const root = createRoot(document.getElementById('root') as HTMLElement);
 //   document.getElementById('root') as HTMLElement
 // );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+  <App />
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

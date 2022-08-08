@@ -1,0 +1,5 @@
+@each $key, $value in $theme-colors {
+  .sail-icon-#{$key} {
+    color: $value;
+  }
+}

@@ -93,7 +93,7 @@ describe('test Menu and menuItem component', () => {
   });
 
   it('should show dropdown items when hover on subMenu', async () => {
-    expect(wrapper.queryByText('drop1')).not.toBeVisible();
+    expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
     const dropdownItem = wrapper.getByText('dropdown');
     fireEvent.mouseEnter(dropdownItem);
     await waitFor(
@@ -114,7 +114,9 @@ describe('test Menu and menuItem component', () => {
   it('should show dropdown items when click on subMenu', async () => {
     cleanup();
     const wrapper = render(generateMenu(testVerticalProps));
-    expect(wrapper.queryByText('drop1')).not.toBeVisible();
+    await waitFor(() => {
+      expect(wrapper.queryByText('drop1')).not.toBeInTheDocument();
+    });
     const dropdownItem = wrapper.getByText('dropdown');
     fireEvent.click(dropdownItem);
     await waitFor(() => {
