@@ -24,12 +24,13 @@
   }
 }
 
-.btn-lg {
+.btn-size-lg {
   @include button-size($btn-padding-x-lg, $btn-padding-y-lg, $btn-font-size-lg, $btn-border-radius-lg);
 }
-.btn-sm {
+.btn-size-sm {
   @include button-size($btn-padding-x-sm, $btn-padding-y-sm, $btn-font-size-sm, $btn-border-radius-sm);
 }
+
 
 .btn-primary {
   @include button-style(

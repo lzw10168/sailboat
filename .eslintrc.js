@@ -19,7 +19,6 @@ module.exports = {
     'no-param-reassign': [0],
     // 取消 { a, b, c } 多个变量需要换行
     'object-curly-newline': [0],
-
     // 禁用var，用let和const代替
     'no-var': 2,
     // 开启强制单引号
@@ -33,21 +32,37 @@ module.exports = {
     // 箭头函数参数括号，一个参数时可省略括号
     'arrow-parens': [2, 'as-needed'],
     // 箭头函数，箭头前后空格
-    'arrow-spacing': [2, { before: true, after: true }],
+    'arrow-spacing': [
+      2,
+      {
+        before: true,
+        after: true
+      }
+    ],
     // 禁止对象最后一项逗号
     'comma-dangle': [2, 'never'],
     // 单行代码/字符串最大长度
-    'max-len': [2, { code: 1120 }],
+    'max-len': [
+      2,
+      {
+        code: 1120
+      }
+    ],
     // jsx缩进2个空格
     'react/jsx-indent': [2, 2],
     // 文件末尾强制换行
     'eol-last': 2,
-
     // react配置
     // 强制组件方法顺序
     'react/sort-comp': [2],
     // 结束标签，组件省略闭合标签，html不省略闭合标签
-    'react/self-closing-comp': [2, { component: true, html: false }],
+    'react/self-closing-comp': [
+      2,
+      {
+        component: true,
+        html: false
+      }
+    ],
     // 检查 Hook 的规则，不允许在if for里面使用
     'react-hooks/rules-of-hooks': [2],
     // 检查 effect 的依赖
@@ -55,5 +70,13 @@ module.exports = {
     // 其余配置项自行添加
     'no-unused-vars': 'warn',
     '@typescript-eslint/no-unused-vars': [1]
-  }
+    // 'comma-dangle': ['never', {
+    //   arrays: 'never',
+    //   objects: 'never',
+    //   imports: 'never',
+    //   exports: 'never',
+    //   functions: 'never'
+    // }]
+  },
+  extends: ['plugin:storybook/recommended']
 };

@@ -13,7 +13,7 @@ export interface SubMenuProps {
   open?: boolean; // vertical mode 下生效
   children?: React.ReactNode;
 }
-const SubMenu = (props: SubMenuProps) => {
+export const SubMenu = (props: SubMenuProps) => {
   const context = useContext(MenuContext);
   const { className, index, title, children } = props;
   const [open, setOpen] = useState(
@@ -27,7 +27,9 @@ const SubMenu = (props: SubMenuProps) => {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     setOpen(!open);
-    context.forceRenderCallback();
+    setTimeout(() => {
+      context.forceRenderCallback();
+    }, 400);
   };
   let timer: any;
   const handleMouse = (e: React.MouseEvent, toggle: boolean) => {

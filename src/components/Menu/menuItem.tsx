@@ -9,7 +9,7 @@ export interface IMenuItemProps {
   index?: string;
   disabled?: boolean;
 }
-const MenuItem = (props: IMenuItemProps) => {
+export const MenuItem = (props: IMenuItemProps) => {
   const { children, className, disabled, index } = props;
   const context = useContext(MenuContext);
   const classes = classNames('menu-item', className, {

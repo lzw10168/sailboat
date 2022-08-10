@@ -24,14 +24,8 @@ interface IContext {
   forceRenderCallback: () => void;
 }
 
-export const MenuContext = createContext<IContext>({
-  onSelect: () => {},
-  activeIndex: '0',
-  menuDom: null,
-  mode: 'vertical',
-  forceRenderCallback: () => {}
-});
-const Menu = (props: MenuProps) => {
+export const MenuContext = createContext<IContext>({} as IContext);
+export const Menu = (props: MenuProps) => {
   const { mode, onSelect, defaultIndex, className, style, children } = props;
   const [activeIndex, setActiveIndex] = useState<string>(defaultIndex || '0');
   const [forceRenderState, setForceRenderState] = useState(0);
