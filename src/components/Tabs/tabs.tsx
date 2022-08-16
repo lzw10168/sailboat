@@ -5,16 +5,16 @@ import { tabDisplayName, ITabProps } from './tab';
 type onChangeCallback = (value: number) => void;
 type Mode = 'vertical' | 'horizontal';
 type type = 'card' | 'border';
-interface ITabsProps {
+export interface ITabsProps {
   children: React.ReactNode;
   value?: number;
-  onChange?: onChangeCallback;
   className?: string;
   style?: React.CSSProperties;
   // mode?: Mode;
   type?: type;
+  onChange?: onChangeCallback;
 }
-interface ITabsContext {
+export interface ITabsContext {
   onChange: onChangeCallback;
   activeIndex: number;
   tabsDom: HTMLElement | null;
@@ -22,7 +22,16 @@ interface ITabsContext {
   mode: Mode;
 }
 export const TabsContext = createContext<ITabsContext>({} as ITabsContext);
-const Tabs = (props: ITabsProps) => {
+
+/**
+ * 使用选项卡，你可以轻松地浏览和切换不同的视图。
+ * ### 引入方式
+ * ~~~js
+ * import { Tabs, Tab, TabPanel } from '@sailboat';
+ * ~~~
+ * * 对于在同一层次，并且息息相关的内容组，使用选项卡能够将它们分组并且在其之间切换。
+ */
+export const Tabs = (props: ITabsProps) => {
   const { children, value, onChange, className, style, type } = props;
   const [activeIndex, setActiveIndex] = useState(value || 0);
   const [forceRenderState, setForceRenderState] = useState(0);

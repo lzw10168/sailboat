@@ -12,7 +12,7 @@ export interface ITabProps {
   style?: React.CSSProperties;
   onClick?: ({ index, label }: { index: number; label: string }) => void;
 }
-const Tab = (props: ITabProps) => {
+export const Tab = (props: ITabProps) => {
   const { label, index, children, onClick, disabled, className, style } = props;
   const context = useContext(TabsContext);
   const classes = classNames('sail-tab', className, {

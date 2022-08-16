@@ -7,7 +7,7 @@ interface ITabPanelProps {
   className?: string;
   style?: React.CSSProperties;
 }
-const TabPanel = (props: ITabPanelProps) => {
+export const TabPanel = (props: ITabPanelProps) => {
   const { value, index, children, style, className } = props;
   const classes = classNames('sail-tabs-panel', className);
   return (

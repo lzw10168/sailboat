@@ -18,28 +18,16 @@ function BasicTabs() {
 
   return (
     <div>
-      <div>
-        <Tabs
-          value={value}
-          type="card"
-          mode="vertical"
-          onChange={handleChange}
-          aria-label="basic tabs example">
-          <Tab label="Item One" disabled />
-          <Tab label="Item Two" />
-          <Tab label="Item Three" />
-        </Tabs>
-      </div>
-      <Menu mode="vertical">
-        <MenuItem> item1</MenuItem>
-        <MenuItem> item2</MenuItem>
-        <MenuItem disabled> item3-disabled</MenuItem>
-        <SubMenu title="下拉选项">
-          <MenuItem> sub-item1</MenuItem>
-          <MenuItem> sub-item2</MenuItem>
-          <MenuItem disabled> sub-item3-disabled</MenuItem>
-        </SubMenu>
-      </Menu>
+      <Tabs
+        value={value}
+        type="card"
+        mode="vertical"
+        onChange={handleChange}
+        aria-label="basic tabs example">
+        <Tab label="Item One" disabled />
+        <Tab label="Item Two" />
+        <Tab label="Item Three" />
+      </Tabs>
       <TabPanel value={value} index={0}>
         Item One
       </TabPanel>

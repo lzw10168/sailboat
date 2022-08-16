@@ -35,7 +35,7 @@ export type ButtonProps = Partial<
  * 页面中最常用的的按钮元素, 支持HTML button 和 a 链接
  * ### 引用方法
  * ~~~js
- * import { Button } from '@sialboat';
+ * import { Button } from '@sailboat';
  * ~~~
  * 按钮可以展示用户能进行的操作。 他们通常直接放置在您的用户界面中，例如：
  *  * Modal windows（模态窗口）
