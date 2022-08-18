@@ -25,6 +25,7 @@ export interface IconProps extends FontAwesomeIconProps {
  * ~~~
  * * 提供了几种主题，可以通过设置`theme`属性来设置主题
  * * props参数支持FontAwesomeIcon的所有属性
+ * * 目前仅支持 solid,
  * * 官方链接: https://fontawesome.com/icons
  */
 export const Icon = (props: IconProps) => {

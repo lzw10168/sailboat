@@ -90,7 +90,7 @@ function App() {
         open={open}
         onClose={onClose}
       />
-      <Icon icon="coffee" theme="primary" />
+      {/* <Icon icon="coffee" theme="primary" /> */}
       {/* <Alert title="this is a alert" description="this is a alert" /> */}
       {/* <Alert title="this is a alert" description="this is a alert" /> */}
     </div>

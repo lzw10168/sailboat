@@ -36,7 +36,7 @@ describe('test Button component', () => {
     const wrapper = render(<Button {...testProps}>Nice</Button>);
     const element = wrapper.getByText('Nice');
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass('btn btn-primary btn-lg klass');
+    expect(element).toHaveClass('btn btn-primary btn-size-lg klass');
   });
 
   it('should render a link when btnType equals link and href is provided', () => {
