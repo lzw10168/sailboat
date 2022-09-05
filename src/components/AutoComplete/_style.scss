@@ -24,6 +24,10 @@
     cursor: pointer;
     transition: $menu-transition;
     color: $body-color;
+    // 溢出打点
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     &.is-active {
       background: $menu-item-active-color !important;
       color: $white !important;

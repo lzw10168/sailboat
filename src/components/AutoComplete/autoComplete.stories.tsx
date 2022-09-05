@@ -18,6 +18,13 @@ export default {
   title: 'AutoComplete',
   component: AutoComplete,
   id: 'AutoComplete',
+  decorators: [
+    AutoComplete => (
+      <div style={{ width: '330px' }}>
+        <AutoComplete />
+      </div>
+    )
+  ],
   parameters: {
     docs: {
       source: {

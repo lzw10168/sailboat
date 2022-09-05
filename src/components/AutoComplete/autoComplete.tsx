@@ -8,7 +8,7 @@ import React, {
   useRef
 } from 'react';
 import classNames from 'classnames';
-import Input, { IInputProps } from '../Input/input';
+import Input, { InputProps } from '../Input/input';
 import Icon from '../Icon/icon';
 import Transition from '../Transition/transition';
 import useDebounce from '../../hooks/useDebounce';
@@ -18,7 +18,7 @@ interface DataSourceObject {
 }
 export type DataSourceType<T = {}> = T & DataSourceObject;
 export interface AutoCompleteProps
-  extends Omit<IInputProps, 'onSelect' | 'onChange'> {
+  extends Omit<InputProps, 'onSelect' | 'onChange'> {
   /**
    * 返回输入建议的方法，可以拿到当前的输入，然后返回同步的数组或者是异步的 Promise
    * type DataSourceType<T = {}> = T & DataSourceObject

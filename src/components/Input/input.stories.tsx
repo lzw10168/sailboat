@@ -1,54 +1,51 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { InputSize } from './input';
-import Input from './input';
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
-
+import { Input } from './input';
 export default {
   title: 'Input',
+  id: 'Input',
   component: Input,
   decorators: [
-    Input => (
-      <div style={{ width: '330px' }}>
-        <Input />
+    Story => (
+      <div style={{ width: '350px' }}>
+        <Story />
       </div>
     )
-  ],
-  parameters: {
-    docs: {
-      // page: mdx
-    }
-  },
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' }
-  }
+  ]
 } as ComponentMeta<typeof Input>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof Input> = args => <Input {...args} />;
+export const ADefault = Template.bind({});
+ADefault.args = {
+  placeholder: ' Input'
+};
+ADefault.storyName = '默认的 Input';
+export const BDisabled = Template.bind({});
+BDisabled.args = {
+  placeholder: 'disabled input',
+  disabled: true
+};
+BDisabled.storyName = '被禁用的 Input';
 
-export const DefaultInput = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-DefaultInput.storyName = 'Default';
-DefaultInput.args = {
-  placeholder: 'please type something...'
+export const CIcon = Template.bind({});
+CIcon.args = {
+  placeholder: 'input with icon',
+  icon: 'search'
 };
-export const IconInput = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-IconInput.storyName = '带图标';
-IconInput.args = {
-  icon: 'magnifying-glass',
-  placeholder: 'please type something...'
-};
+CIcon.storyName = '带图标的 Input';
 
-export const ExtendsInput = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-ExtendsInput.storyName = '前后置内容';
-ExtendsInput.args = {
-  icon: 'magnifying-glass',
-  prepand: 'https://',
-  append: '.com',
-  placeholder: 'please type something...'
-};
+export const DSizeInput = () => (
+  <>
+    <Input defaultValue="large size" size="lg" />
+    <Input placeholder="small size" size="sm" />
+  </>
+);
+DSizeInput.storyName = '大小不同的 Input';
+export const EPandInput = () => (
+  <>
+    <Input defaultValue="prepend text" prepend="https://" />
+    <Input defaultValue="google" append=".com" />
+  </>
+);
+
+EPandInput.storyName = '带前后缀的 Input';

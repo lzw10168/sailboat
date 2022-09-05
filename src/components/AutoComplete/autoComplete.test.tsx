@@ -12,6 +12,7 @@ import {
   DataSourceType
 } from './autoComplete';
 
+// https://reactcommunity.org/react-transition-group/testing
 config.disabled = true;
 jest.mock('../Icon/icon', () => {
   return (props: any) => {
@@ -54,6 +55,7 @@ describe('test AutoComplete component', () => {
       'auto-complete'
     ) as HTMLInputElement;
   });
+
   it('test basic AutoComplete behavior', async () => {
     // input change
     fireEvent.change(inputNode, { target: { value: 'a' } });
@@ -74,6 +76,7 @@ describe('test AutoComplete component', () => {
     //fill the input
     expect(inputNode.value).toBe('ab');
   });
+
   it('should provide keyboard support', async () => {
     // input change
     fireEvent.change(inputNode, { target: { value: 'a' } });
@@ -100,6 +103,7 @@ describe('test AutoComplete component', () => {
     });
     expect(wrapper.queryByText('ab')).not.toBeInTheDocument();
   });
+
   it('click outside should hide the dropdown', async () => {
     // input change
     fireEvent.change(inputNode, { target: { value: 'a' } });
@@ -109,6 +113,7 @@ describe('test AutoComplete component', () => {
     fireEvent.click(document);
     expect(wrapper.queryByText('ab')).not.toBeInTheDocument();
   });
+
   it('renderOption should generate the right template', async () => {
     const wrapper = render(<AutoComplete {...testPropsWithCustomRender} />);
     const inputNode = wrapper.getByPlaceholderText(
@@ -119,6 +124,7 @@ describe('test AutoComplete component', () => {
       expect(wrapper.queryByText('name: ab')).toBeInTheDocument();
     });
   });
+
   it('async fetchSuggestions should works fine', async () => {
     const testPropsWithPromise: AutoCompleteProps = {
       ...testProps,

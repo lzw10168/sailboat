@@ -85,3 +85,5 @@ components/
 ### normalize.css
 
   
+### other
+* 单个组件测试: `npm test -- -t "regular"`
