@@ -9,6 +9,7 @@ import Tabs from './components/Tabs/tabs';
 import Tab from './components/Tabs/tab';
 import TabPanel from './components/Tabs/tabPanel';
 import Icon from './components/Icon/icon';
+import Input from './components/Input/input';
 function BasicTabs() {
   const [value, setValue] = useState(0);
 
@@ -61,6 +62,7 @@ function App() {
   };
   return (
     <div className="App">
+      <Input value="1" />
       <BasicTabs />
       <Menu>
         <SubMenu title="城市2">

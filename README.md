@@ -1,6 +1,9 @@
+
 # sailboat
 > it's just a simple component library
 
+> dependencies version
+  * [node] 16+
 ### 考虑的问题
 
 - 代码结构

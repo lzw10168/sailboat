@@ -5,39 +5,37 @@ import { debounce } from 'lodash-es';
 import Icon from '../Icon/icon';
 export type InputSize = 'sm' | 'md' | 'lg';
 // Omit 忽略掉 InputHTMLAttributes 中的 size 属性
-export interface InputProps
-  extends Omit<InputHTMLAttributes<HTMLElement>, 'size' | 'onChange'> {
+export interface IInputProps
+  extends Omit<InputHTMLAttributes<HTMLElement>, 'size'> {
   disabled?: boolean;
   size?: InputSize;
   icon?: IconProp;
   prepand?: string | React.ReactElement;
   append?: string | React.ReactElement;
   className?: string;
-  defaultValue?: string;
+  value: string;
   // 事件
-  onChange?: (value?: string) => void;
-  onIconClick?: (value?: string) => void;
-  onEnter?: (value?: string) => void;
+  onIconClick?: () => void;
+  onEnter?: () => void;
 }
 
-export const Input = (props: InputProps) => {
+export const Input = (props: IInputProps) => {
   // 取出各种属性
   const {
     disabled,
     size,
-    defaultValue,
+    value,
     icon,
     prepand,
     append,
     className,
     onIconClick,
     onEnter,
-    onChange,
     ...restProps
   } = props;
+
   // 根据属性计算 className
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState(defaultValue || '');
   const classes = classNames('sail-input', className, {
     [`input-${size}`]: size,
     'is-disabled': disabled,
@@ -45,22 +43,16 @@ export const Input = (props: InputProps) => {
   });
   const handleIconClick = () => {
     if (onIconClick) {
-      onIconClick(value);
+      onIconClick();
     }
   };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (onEnter && e.keyCode === 13) {
-      onEnter(value);
+      onEnter();
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-    if (onChange) {
-      onChange(e.target.value);
-    }
-  };
   // 根据属性添加特定节点, 如 prepand, append icon
   const prepandNode = prepand ? (
     <div className="input-prepand">{prepand}</div>
@@ -84,7 +76,6 @@ export const Input = (props: InputProps) => {
         disabled={disabled}
         value={value}
         onKeyDown={handleEnter}
-        onChange={handleChange}
         {...restProps}
         onFocus={e => {
           setFocused(true);
