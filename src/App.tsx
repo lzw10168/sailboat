@@ -1,46 +1,16 @@
-import { createContext, useState } from 'react';
-
-import Alert, { AlertType } from './components/Alert/alert';
-import Button, { ButtonType, ButtonSize } from './components/Button/button';
-import Menu from './components/Menu/menu';
-import MenuItem from './components/Menu/menuItem';
-import SubMenu from './components/Menu/subMenu';
-import Tabs from './components/Tabs/tabs';
-import Tab from './components/Tabs/tab';
-import TabPanel from './components/Tabs/tabPanel';
-import Icon from './components/Icon/icon';
-import Input from './components/Input/input';
-function BasicTabs() {
-  const [value, setValue] = useState(0);
-
-  const handleChange = (newValue: number) => {
-    setValue(newValue);
-  };
-
-  return (
-    <div>
-      <Tabs
-        value={value}
-        type="card"
-        mode="vertical"
-        onChange={handleChange}
-        aria-label="basic tabs example">
-        <Tab label="Item One" disabled />
-        <Tab label="Item Two" />
-        <Tab label="Item Three" />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-    </div>
-  );
-}
+import React, { createContext, useState } from 'react';
+import axios from 'axios';
+// import Alert, { AlertType } from './components/Alert/alert';
+// import Button, { ButtonType, ButtonSize } from './components/Button/button';
+// import Menu from './components/Menu/menu';
+// import MenuItem from './components/Menu/menuItem';
+// import SubMenu from './components/Menu/subMenu';
+// import Tabs from './components/Tabs/tabs';
+// import Tab from './components/Tabs/tab';
+// import TabPanel from './components/Tabs/tabPanel';
+// import Icon from './components/Icon/icon';
+// import Input from './components/Input/input';
+import Upload from './components/Upload';
 interface ThemeProps {
   [key: string]: { color: string; backgroundColor: string };
 }
@@ -55,46 +25,35 @@ const themes: ThemeProps = {
   }
 };
 function App() {
-  const [theme, setTheme] = useState(themes.light);
-  const [open, setOpen] = useState(false);
-  const onClose = () => {
-    setOpen(false);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // https://jsonplaceholder.typicode.com/posts
+    const files = e.target.files;
+    if (files) {
+      const uploadedFile = files[0];
+      const formData = new FormData();
+      formData.append(uploadedFile.name, uploadedFile);
+      axios
+        .post('https://jsonplaceholder.typicode.com/posts', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(resp => {
+          console.log(resp);
+        });
+    }
   };
   return (
     <div className="App">
-      <Input value="1" />
-      <BasicTabs />
-      <Menu>
-        <SubMenu title="城市2">
-          <MenuItem>背景</MenuItem>
-          <MenuItem disabled>图片</MenuItem>
-        </SubMenu>
-        <MenuItem>上海</MenuItem>
-      </Menu>
-      <p>------------------------------------------------</p>
-      {/* <Alert title="this is a alert" description="this is a alert" /> */}
-      <button
-        onClick={() => {
-          setOpen(true);
-        }}>
-        打开
-      </button>
-      <Button
-        onClick={() => {
-          setOpen(false);
-        }}>
-        关闭
-      </Button>
-      <Alert
-        type={AlertType.Default}
-        title="this is a alert"
-        description="this is a alert"
-        open={open}
-        onClose={onClose}
+      <Upload
+        action="https://jsonplaceholder.typicode.com/posts"
+        name="fileName"
+        data={{ key: 'fileName' }}
+        headers={{ 'X-Powered-By': 'sailboat' }}
+        multiple
+        dragger
+        theme="success"
       />
-      {/* <Icon icon="coffee" theme="primary" /> */}
-      {/* <Alert title="this is a alert" description="this is a alert" /> */}
-      {/* <Alert title="this is a alert" description="this is a alert" /> */}
     </div>
   );
 }

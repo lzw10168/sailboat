@@ -80,3 +80,30 @@
   border-top-left-radius: $raduis;
   border-top-right-radius: $raduis;
 }
+
+@mixin theme-bg-color {
+  .color-primary {
+    background-color: $primary;
+  }
+  .color-secondary {
+    background-color: $secondary;
+  }
+  .color-success {
+    background-color: $success;
+  }
+  .color-info {
+    background-color: $info;
+  }
+  .color-warning {
+    background-color: $warning;
+  }
+  .color-danger {
+    background-color: $danger;
+  }
+  .color-light {
+    background-color: $light;
+  }
+  .color-dark {
+    background-color: $dark;
+  }
+}
