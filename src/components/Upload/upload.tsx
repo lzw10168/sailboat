@@ -17,6 +17,7 @@ export interface UploadFile {
 }
 
 export interface UploadProps {
+  children?: React.ReactNode;
   action: string;
   beforeUpload?: (file: File) => boolean | Promise<File>;
   onProgress?: (percentage: number, file: UploadFile) => void;
@@ -26,7 +27,6 @@ export interface UploadProps {
   onRemove?: (file: UploadFile) => void;
   onPreview?: (file: UploadFile) => void;
   theme?: ThemeProps;
-  btnText?: string;
   headers?: { [key: string]: any };
   name?: string;
   data?: { [key: string]: any };
@@ -74,7 +74,7 @@ export const Upload = (props: UploadProps) => {
     withCredentials,
     accept,
     multiple,
-    btnText,
+    children,
     dragger,
     theme
   } = props;
@@ -126,7 +126,6 @@ export const Upload = (props: UploadProps) => {
     });
   };
   const postFile = (file: File) => {
-    console.log('file: ', file);
     const uploadFile = new GeneratUploadFile(file);
     setFileList(prevList => {
       return [...prevList, uploadFile];
@@ -157,19 +156,17 @@ export const Upload = (props: UploadProps) => {
         }
       })
       .then(resp => {
-        updateFileList(uploadFile, {
-          status: 'success',
-          response: resp.data
-        });
+        uploadFile.status = 'success';
+        uploadFile.response = resp.data;
+        updateFileList(uploadFile, uploadFile);
         if (onSuccess) {
           onSuccess(resp.data, uploadFile);
         }
       })
       .catch(error => {
-        updateFileList(uploadFile, {
-          status: 'error',
-          error: error
-        });
+        uploadFile.status = 'error';
+        uploadFile.error = error;
+        updateFileList(uploadFile, uploadFile);
         if (onError) {
           onError(error, uploadFile);
         }
@@ -199,14 +196,21 @@ export const Upload = (props: UploadProps) => {
       uploadFiles(files);
     }
   };
-  console.log(fileList);
   return (
     <div className="sailboat-upload-component">
       <div className="sailboat-upload-area" onClick={handleClick}>
         {dragger ? (
-          <Dragger theme={theme} onFile={onFileDrop} />
+          <Dragger theme={theme} onFile={onFileDrop}>
+            {children}
+          </Dragger>
         ) : (
-          <Button btnType={ButtonType.Primary}>{btnText}</Button>
+          <>
+            {children ? (
+              children
+            ) : (
+              <Button btnType={ButtonType.Primary}>Upload File</Button>
+            )}
+          </>
         )}
       </div>
       <input

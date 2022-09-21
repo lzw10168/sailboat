@@ -97,7 +97,6 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
     setHighlightIndex(index);
   };
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    console.log(e);
     switch (e.keyCode) {
       case 13:
         if (suggestions[highlightIndex]) {
@@ -119,7 +118,6 @@ export const AutoComplete: FC<AutoCompleteProps> = props => {
   };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
-    console.log('triggered the value', value);
     setInputValue(value);
     if (onChange) {
       onChange(value);
