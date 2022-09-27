@@ -1,9 +1,11 @@
 import React, { createContext, ReactNode } from 'react';
 import FormItem, { FormItemProps } from './formItem';
 import Schema, { RuleItem, ValidateError } from 'async-validator';
-import useStore from './useStore';
+import useStore, { FormState } from './useStore';
+
+export type RenderProps = (form: FormState) => ReactNode;
 export interface FormProps {
-  children?: ReactNode;
+  children?: ReactNode | RenderProps;
   name?: string;
   initialValues?: Record<string, any>;
   onFinish?: (values: Record<string, any>) => void;
@@ -40,15 +42,13 @@ export function Form(props: FormProps) {
       onFinishFailed(value, errors);
     }
   };
+  const RenderChildren: ReactNode =
+    typeof children === 'function' ? children(form) : children;
   return (
     <FormContext.Provider value={passedContext}>
       <form name={name} className={'sailboat-form'} onSubmit={submitForm}>
-        {children}
+        {RenderChildren}
       </form>
-      {/* <div>
-        <div>{JSON.stringify(form)}</div>
-        <div>{JSON.stringify(fields)}</div>
-      </div> */}
     </FormContext.Provider>
   );
 }

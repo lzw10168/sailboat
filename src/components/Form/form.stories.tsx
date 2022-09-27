@@ -28,11 +28,15 @@ export const BasicForm = (args: any) => {
     },
     ({ getFieldValue }) => ({
       asyncValidator(rule, value) {
-        if (getFieldValue('password') === value) {
-          return Promise.resolve();
-        } else {
-          return Promise.reject('两次密码不一致');
-        }
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (getFieldValue('password') === value) {
+              resolve();
+            } else {
+              reject('两次密码不一致');
+            }
+          }, 2000);
+        });
       }
     })
   ];
@@ -42,35 +46,41 @@ export const BasicForm = (args: any) => {
         user: '22222'
       }}
       {...args}>
-      <Form.Item
-        name="user"
-        label="用户名"
-        rules={[
-          {
-            required: true,
-            type: 'email'
-          }
-        ]}>
-        <Input type="text" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        label="密码"
-        rules={[
-          {
-            required: true
-          }
-        ]}>
-        <Input type="password" />
-      </Form.Item>
-      <Form.Item name="confirmPwd" label="重复密码" rules={confirmRules}>
-        <Input type="password" />
-      </Form.Item>
-      <div className="sailboat-form-submit-area">
-        <Button type="submit" btnType="primary">
-          登陆
-        </Button>
-      </div>
+      {({ isSubmitting, isValid }) => (
+        <>
+          <Form.Item
+            name="user"
+            label="用户名"
+            rules={[
+              {
+                required: true,
+                type: 'email'
+              }
+            ]}>
+            <Input type="text" />
+          </Form.Item>
+          <Form.Item
+            name="password"
+            label="密码"
+            rules={[
+              {
+                required: true
+              }
+            ]}>
+            <Input type="password" />
+          </Form.Item>
+          <Form.Item name="confirmPwd" label="重复密码" rules={confirmRules}>
+            <Input type="password" />
+          </Form.Item>
+          <div className="sailboat-form-submit-area">
+            <Button type="submit" btnType="primary">
+              {isSubmitting ? '提交中' : '提交'}
+              --
+              {isValid ? '验证通过' : '验证失败'}
+            </Button>
+          </div>
+        </>
+      )}
     </Form>
   );
 };
