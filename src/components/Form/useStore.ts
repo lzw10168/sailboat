@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react';
 import Schema, { RuleItem, ValidateError } from 'async-validator';
-
+import { each, mapValues } from 'lodash-es';
 export type CustomRuleFunc = ({
   getFieldValue
 }: {
@@ -20,6 +20,12 @@ export interface FieldsState {
 
 export interface FormState {
   isValid: boolean;
+  isSubmitting: boolean; // 验证开始的时候设置为true, 验证结束的时候设置为false
+  errors: Record<string, ValidateError[]>;
+}
+export interface ValidateErrorType extends Error {
+  errors: ValidateError[];
+  fields: Record<string, ValidateError[]>;
 }
 
 export const ADD_FIELD = 'addField';
@@ -64,7 +70,11 @@ function fieldsReducer(state: FieldsState, action: FieldAction): FieldsState {
 
 function useStore() {
   // form state
-  const [form, setForm] = useState<FormState>({ isValid: true });
+  const [form, setForm] = useState<FormState>({
+    isValid: true,
+    isSubmitting: false,
+    errors: {}
+  });
   // fields state
   const [fields, dispatch] = useReducer(fieldsReducer, {});
   // getValue
@@ -98,8 +108,7 @@ function useStore() {
       await validator.validate(valueMap);
     } catch (error) {
       isValid = false;
-      const err = error as any;
-      console.log(err);
+      const err = error as ValidateErrorType;
       errors = err.errors;
     } finally {
       console.log(isValid);
@@ -113,11 +122,68 @@ function useStore() {
       });
     }
   };
+
+  // 验证所有
+  const validateAllField = async () => {
+    let isValid = true;
+    let errors: Record<string, ValidateError[]> = {};
+    // 数据转化
+    // {username: {value: '123', rules: RuleItem[], errors:[]}} => {username: RuleItem[]} , {username: '123'}
+    const descriptor = mapValues(fields, field => {
+      return transformRule(field.rules);
+    });
+    // {username: '123'}
+    const valueMap = mapValues(fields, field => field.value);
+    const validator = new Schema(descriptor);
+    setForm({ ...form, isSubmitting: true });
+    try {
+      await validator.validate(valueMap);
+    } catch (error) {
+      isValid = false;
+      const err = error as ValidateErrorType;
+      errors = err.fields;
+
+      each(fields, (value, name) => {
+        if (errors[name]) {
+          const itemErrors = errors[name];
+          dispatch({
+            type: UPDATE_VALIDATE_RESULT,
+            name: name,
+            value: {
+              isValid: false,
+              errors: itemErrors
+            }
+          });
+        } else if (value.rules.length > 0 && !errors[name]) {
+          dispatch({
+            type: UPDATE_VALIDATE_RESULT,
+            name: name,
+            value: {
+              isValid: true,
+              errors: []
+            }
+          });
+        }
+      });
+    } finally {
+      setForm({
+        isValid,
+        isSubmitting: false,
+        errors
+      });
+    }
+    return {
+      isValid,
+      errors,
+      value: valueMap
+    };
+  };
   return {
     form,
     fields,
     dispatch,
-    validateField
+    validateField,
+    validateAllField
   };
 }
 

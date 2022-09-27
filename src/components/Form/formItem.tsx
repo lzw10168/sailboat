@@ -71,7 +71,14 @@ export function FormItem(props: FormItemProps) {
     dispatch({
       type: ADD_FIELD,
       name: name,
-      value: { label, name, value, rules, isValid: true }
+      value: {
+        label,
+        name,
+        value,
+        rules: rules || [],
+        errors: [],
+        isValid: true
+      }
     });
   }, []);
 
