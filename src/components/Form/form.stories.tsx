@@ -4,6 +4,7 @@ import { Form } from './form';
 import Input from '../Input/input';
 import Button from '../Button/button';
 import Icon from '../Icon/icon';
+import { type } from 'os';
 
 export default {
   title: 'Form',
@@ -25,7 +26,15 @@ export const BasicForm = (args: any) => (
       user: '22222'
     }}
     {...args}>
-    <Form.Item name="user" label="用户名">
+    <Form.Item
+      name="user"
+      label="用户名"
+      rules={[
+        {
+          required: true,
+          type: 'email'
+        }
+      ]}>
       <Input type="text" />
     </Form.Item>
     <Form.Item name="password" label="密码">

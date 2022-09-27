@@ -1,5 +1,6 @@
 .sailboat-form {
   .sailboat-row {
+    position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 25px;
@@ -9,13 +10,32 @@
     .sailboat-form-item {
       flex-basis: 70%;
     }
+    .sailboat-form-item-has-error {
+      input {
+        transition: border-color 0.3s;
+        border-color: $danger;
+        box-shadow: $input-focus-box-shadow-error;
+      }
+    }
+    .sailboat-form-item-error {
+      position: absolute;
+      color: $danger;
+    }
     .sailboat-form-item-label {
       flex-basis: 30%;
       text-align: right;
       padding-right: 20px;
-      >label {
-        margin-bottom: 0;
-      }
+    }
+    label {
+      margin-bottom: 0;
+    }
+    .sailboat-form-item-required::before {
+      display: inline-block;
+      margin-right: 4px;
+      color: $danger;
+      font-size: 14px;
+      line-height: 1;
+      content: '*'
     }
     .sailboat-form-submit {
       display: flex;

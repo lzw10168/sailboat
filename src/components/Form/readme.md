@@ -43,3 +43,63 @@
     resetField: (key) => {},
   }
   ```
+
+
+### 验证功能
+#### 场景
+  * 每个Item的验证
+  * 整个Form的验证
+#### 流程
+  * 每个Item的验证
+    * 1.用户输入
+    * 2.用户离开input(onBlur)
+    * 3.验证
+    * 4.验证结果
+  * 整个Form的验证
+    * 1.用户点击提交
+    * 2.验证
+    * 3.验证结果
+#### 第三方库
+  [链接](https://github.com/yiminghe/async-validator)
+  ```js
+  import Schema from 'async-validator';
+  const descriptor = {
+    name: {
+      // 非常多的type
+      // https://github.com/yiminghe/async-validator#type
+      type: 'string',
+      required: true,
+      validator: (rule, value) => value === 'muji',
+    },
+    age: {
+      type: 'number',
+      asyncValidator: (rule, value) => {
+        return new Promise((resolve, reject) => {
+          if (value < 18) {
+            reject('too young');  // reject with error message
+          } else {
+            resolve();
+          }
+        });
+      },
+    },
+  };
+  const validator = new Schema(descriptor);
+  // 俩种验证方式, 第一种是回调
+  validator.validate({ name: 'muji' }, (errors, fields) => {
+    if (errors) {
+      // validation failed, errors is an array of all errors
+      // fields is an object keyed by field name with an array of
+      // errors per field
+      return handleErrors(errors, fields);
+    }
+    // validation passed
+  });
+
+  // PROMISE USAGE
+  validator.validate({ name: 'muji', age: 16 }).then(() => {
+    // validation passed or without error message
+  }).catch(({ errors, fields }) => {
+    return handleErrors(errors, fields);
+  });
+  ```
