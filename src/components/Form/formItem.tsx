@@ -2,7 +2,12 @@ import classNames from 'classnames';
 import React, { ReactElement, ReactNode, useContext, useEffect } from 'react';
 import { RuleItem, ValidateError } from 'async-validator';
 import { FormContext } from './form';
-import { ADD_FIELD, UPDATE_VALIDATE_RESULT, UPDATE_VALUE } from './useStore';
+import {
+  ADD_FIELD,
+  UPDATE_VALIDATE_RESULT,
+  UPDATE_VALUE,
+  CustomRule
+} from './useStore';
 
 export type SomeRequired<T, K extends keyof T> = Required<Pick<T, K>> &
   Omit<T, K>;
@@ -19,7 +24,7 @@ export interface FormItemProps {
   // 校验触发
   validateTrigger?: string;
   // 校验规则
-  rules?: RuleItem[];
+  rules?: CustomRule[];
 }
 // 检查子组件function
 function checkChild(childList: any[]) {
@@ -74,7 +79,9 @@ export function FormItem(props: FormItemProps) {
   const filedState = fields[name];
   const value = filedState && filedState.value;
   const errors = filedState && filedState.errors;
-  const isRequired = rules?.some(rule => rule.required);
+  const isRequired = rules?.some(rule => {
+    return typeof rule !== 'function' ? rule.required : false;
+  });
   const hasError = errors && errors.length > 0;
   const rowClass = classNames('sailboat-row', {
     'sailboat-row-no-label': !label

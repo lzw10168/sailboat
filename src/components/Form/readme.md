@@ -103,3 +103,26 @@
     return handleErrors(errors, fields);
   });
   ```
+
+
+#### 自定义Rule的规则
+
+```typescript
+  (getValue) => {
+    const otherValue = getValue('pwd')
+    return {
+      asyncValidator: (rule, value) => {
+        return new Promise((resolve, reject) => {
+          if (value !== otherValue) {
+            reject('两次密码不一致');  // reject with error message
+          } else {
+            resolve();
+          }
+        });
+      },
+    }
+  }
+
+  type CustomRuleFunc = ({getFieldValue}) => RuleItem;
+
+```

@@ -28,10 +28,10 @@ export function Form(props: FormProps) {
       <form name={name} className={'sailboat-form'}>
         {children}
       </form>
-      <div>
+      {/* <div>
         <div>{JSON.stringify(form)}</div>
         <div>{JSON.stringify(fields)}</div>
-      </div>
+      </div> */}
     </FormContext.Provider>
   );
 }
