@@ -7,6 +7,7 @@ import TabPanel from './tabPanel';
 export default {
   title: 'Tabs',
   component: Tabs,
+  subcomponents: { TabItem: Tab },
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' }

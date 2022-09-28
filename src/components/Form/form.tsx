@@ -1,4 +1,9 @@
-import React, { createContext, ReactNode } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  forwardRef,
+  useImperativeHandle
+} from 'react';
 import FormItem, { FormItemProps } from './formItem';
 import Schema, { RuleItem, ValidateError } from 'async-validator';
 import useStore, { FormState } from './useStore';
@@ -22,10 +27,14 @@ export type IFormContext = Pick<
   Pick<FormProps, 'initialValues'>;
 export const FormContext = createContext<IFormContext>({} as IFormContext);
 
-export function Form(props: FormProps) {
+export const Form = forwardRef<any, FormProps>((props, ref) => {
   const { children, name, initialValues, onFinish, onFinishFailed } = props;
-  const { form, fields, dispatch, validateField, validateAllField } =
-    useStore();
+  const { form, fields, dispatch, ...resetProps } = useStore(initialValues);
+  const { validateField, validateAllField } = resetProps;
+  useImperativeHandle(ref, () => ({
+    ...resetProps
+  }));
+
   const passedContext: IFormContext = {
     dispatch,
     fields,
@@ -51,7 +60,13 @@ export function Form(props: FormProps) {
       </form>
     </FormContext.Provider>
   );
-}
+});
 
-Form.Item = FormItem;
-export default Form;
+type CompoundedType = typeof Form & {
+  Item: typeof FormItem;
+};
+
+const Compounded = Form as CompoundedType;
+Compounded.Item = FormItem;
+
+export default Compounded;

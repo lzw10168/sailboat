@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { Form } from './form';
+import Form from './form';
 import Input from '../Input/input';
 import Button from '../Button/button';
 import Icon from '../Icon/icon';
@@ -22,6 +22,8 @@ export default {
 } as ComponentMeta<typeof Form>;
 
 export const BasicForm = (args: any) => {
+  const ref = useRef<HTMLElement>();
+
   const confirmRules: CustomRule[] = [
     {
       required: true
@@ -45,7 +47,8 @@ export const BasicForm = (args: any) => {
       initialValues={{
         user: '22222'
       }}
-      {...args}>
+      {...args}
+      ref={ref}>
       {({ isSubmitting, isValid }) => (
         <>
           <Form.Item
