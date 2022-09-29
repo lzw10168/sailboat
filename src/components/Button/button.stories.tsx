@@ -1,6 +1,5 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ButtonSize, ButtonType } from './button';
 import Button from './button';
 // import mdx from './button.mdx';
 
@@ -26,25 +25,25 @@ const Template: ComponentStory<typeof Button> = args => <Button {...args} />;
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  btnType: ButtonType.Primary,
+  btnType: 'primary',
   children: 'Button'
 };
 export const Default = Template.bind({});
 Default.args = {
-  children: 'Button',
-  btnType: ButtonType.Default
+  btnType: 'default',
+  children: 'Button'
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
-  size: ButtonSize.Large,
-  btnType: ButtonType.Danger,
+  size: 'lg',
+  btnType: 'danger',
   children: 'Button'
 };
 
 export const Link = Template.bind({});
 Link.args = {
-  size: ButtonSize.Small,
-  btnType: ButtonType.Link,
+  size: 'sm',
+  btnType: 'link',
   children: 'Button'
 };

@@ -11,14 +11,14 @@ export default {
   title: 'Form',
   id: 'Form',
   component: Form,
-  subcomponents: { Item: Form.Item },
-  decorators: [
-    Story => (
-      <div style={{ width: '500px' }}>
-        <Story />
-      </div>
-    )
-  ]
+  subcomponents: { Item: Form.Item }
+  // decorators: [
+  //   Story => (
+  //     <div style={{ width: '500px' }}>
+  //       <Story />
+  //     </div>
+  //   )
+  // ]
 } as ComponentMeta<typeof Form>;
 
 export const BasicForm = (args: any) => {
@@ -43,48 +43,50 @@ export const BasicForm = (args: any) => {
     })
   ];
   return (
-    <Form
-      initialValues={{
-        user: '22222'
-      }}
-      {...args}
-      ref={ref}>
-      {({ isSubmitting, isValid }) => (
-        <>
-          <Form.Item
-            name="user"
-            label="用户名"
-            rules={[
-              {
-                required: true,
-                type: 'email'
-              }
-            ]}>
-            <Input type="text" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            label="密码"
-            rules={[
-              {
-                required: true
-              }
-            ]}>
-            <Input type="password" />
-          </Form.Item>
-          <Form.Item name="confirmPwd" label="重复密码" rules={confirmRules}>
-            <Input type="password" />
-          </Form.Item>
-          <div className="sailboat-form-submit-area">
-            <Button type="submit" btnType="primary">
-              {isSubmitting ? '提交中' : '提交'}
-              --
-              {isValid ? '验证通过' : '验证失败'}
-            </Button>
-          </div>
-        </>
-      )}
-    </Form>
+    <div style={{ width: '500px' }}>
+      <Form
+        initialValues={{
+          user: '22222'
+        }}
+        {...args}
+        ref={ref}>
+        {({ isSubmitting, isValid }) => (
+          <>
+            <Form.Item
+              name="user"
+              label="用户名"
+              rules={[
+                {
+                  required: true,
+                  type: 'email'
+                }
+              ]}>
+              <Input type="text" />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              label="密码"
+              rules={[
+                {
+                  required: true
+                }
+              ]}>
+              <Input type="password" />
+            </Form.Item>
+            <Form.Item name="confirmPwd" label="重复密码" rules={confirmRules}>
+              <Input type="password" />
+            </Form.Item>
+            <div className="sailboat-form-submit-area">
+              <Button type="submit" btnType="primary">
+                {isSubmitting ? '提交中' : '提交'}
+                --
+                {isValid ? '验证通过' : '验证失败'}
+              </Button>
+            </div>
+          </>
+        )}
+      </Form>
+    </div>
   );
 };
 BasicForm.storyName = 'Form 组件';

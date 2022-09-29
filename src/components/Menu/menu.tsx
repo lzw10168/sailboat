@@ -7,10 +7,12 @@ import { subMenuDisplayName } from './subMenu';
 import { activeBarDisplayName } from './activeBar';
 import ActiveBar from './activeBar';
 type Mode = 'vertical' | 'horizontal';
-type SelectCallback = (index: string) => void;
+interface SelectCallback {
+  (selectedIndex: string): void;
+}
 export interface MenuProps {
   mode?: Mode;
-  onSelect?: SelectCallback;
+  onSelect?: (selectedIndex: string) => void;
   defaultIndex?: string;
   className?: string;
   style?: React.CSSProperties;

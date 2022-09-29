@@ -4,14 +4,14 @@ import { Input } from './input';
 export default {
   title: 'Input',
   id: 'Input',
-  component: Input,
-  decorators: [
-    Story => (
-      <div style={{ width: '350px' }}>
-        <Story />
-      </div>
-    )
-  ]
+  component: Input
+  // decorators: [
+  //   Input => (
+  //     <div style={{ width: '350px' }}>
+  //       <Input />
+  //     </div>
+  //   )
+  // ]
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = args => <Input {...args} />;
@@ -36,14 +36,18 @@ CIcon.storyName = '带图标的 Input';
 
 export const DSizeInput = () => (
   <>
-    <Input defaultValue="large size" size="lg" />
+    <Input style={{ margin: '10px 0' }} defaultValue="large size" size="lg" />
     <Input placeholder="small size" size="sm" />
   </>
 );
 DSizeInput.storyName = '大小不同的 Input';
 export const EPandInput = () => (
   <>
-    <Input defaultValue="prepend text" prepend="https://" />
+    <Input
+      style={{ margin: '10px 0' }}
+      defaultValue="prepend text"
+      prepend="https://"
+    />
     <Input defaultValue="google" append=".com" />
   </>
 );

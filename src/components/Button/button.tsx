@@ -70,7 +70,8 @@ export const Button = (props: ButtonProps) => {
 
 Button.defaultProps = {
   disabled: false,
-  btnType: 'md'
+  btnType: 'primary',
+  size: 'md'
 };
 
 export default Button;
