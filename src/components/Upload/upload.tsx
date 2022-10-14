@@ -208,7 +208,7 @@ export const Upload = (props: UploadProps) => {
             {children ? (
               children
             ) : (
-              <Button btnType={ButtonType.Primary}>Upload File</Button>
+              <Button btnType="primary">Upload File</Button>
             )}
           </>
         )}

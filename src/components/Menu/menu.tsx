@@ -93,7 +93,7 @@ export const Menu = (props: MenuProps) => {
 };
 Menu.defaultProps = {
   mode: 'horizontal',
-  defaultIndex: 0
+  defaultIndex: '0'
 };
 
 export default Menu;

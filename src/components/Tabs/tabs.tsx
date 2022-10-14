@@ -6,7 +6,7 @@ type onChangeCallback = (value: number) => void;
 type Mode = 'vertical' | 'horizontal';
 type type = 'card' | 'border';
 export interface ITabsProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   value?: number;
   className?: string;
   style?: React.CSSProperties;

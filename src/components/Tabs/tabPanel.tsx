@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-interface ITabPanelProps {
+export interface ITabPanelProps {
   value: number;
   index: number;
   children: React.ReactNode;

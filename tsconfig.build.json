@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "esnext",
+    "target": "es5",
+    "declaration": true, // 为了生成 .d.ts 文件
+    "jsx": "react-jsx", // 为了支持 JSX, 使用createReactElement
+    "moduleResolution": "Node", // Specify the module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6).
+    "allowSyntheticDefaultImports": true, // 为了支持 import React from 'react'
+  },
+  "exclude": [
+    "src/**/*.test.tsx",
+    "src/**/*.stories.tsx",
+  ]
+}
