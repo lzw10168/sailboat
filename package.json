@@ -1,47 +1,54 @@
 {
-  "name": "sailboat",
+  "name": "sailboat-design",
   "version": "0.1.0",
-  "private": true,
-  "main": "build/index.js",
-  "module": "build/index.js",
-  "types": "build/index.d.ts",
+  "description": "A simple sailboat simulator",
+  "author": "Kyle L",
+  "private": false,
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "keywords": [
+    "Component",
+    "UI",
+    "React",
+    "sailboat",
+    "sailing",
+    "simulator"
+  ],
+  "homepage": "https://github.com/lzw10168/sailboat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lzw10168/sailboat"
+  },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-brands-svg-icons": "^6.1.2",
     "@fortawesome/free-regular-svg-icons": "^6.1.2",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.45",
-    "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.6",
     "async-validator": "^4.2.5",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "lodash-es": "^4.17.21",
-    "node-sass": "^7.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
-    "react-scripts": "5.0.1",
-    "react-syntax-highlighter": "^15.5.0",
     "react-transition-group": "^4.4.5",
-    "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "clean": "rimraf ./build",
-    "build": "npm run clean && npm run build-ts && npm run build-css",
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && npm run build-ts && npm run build-css && npm version patch",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
-    "build-css": "node-sass ./src/styles/index.scss ./build/index.css"
+    "build-css": "node-sass ./src/styles/index.scss ./build/index.css",
+    "prepublish": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -71,7 +78,15 @@
       "last 1 safari version"
     ]
   },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
   "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "node-sass": "^7.0.1",
+    "react-syntax-highlighter": "^15.5.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",
@@ -83,12 +98,21 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^13.5.0",
     "@types/lodash-es": "^4.17.6",
     "@types/react-transition-group": "^4.4.5",
     "@types/webpack": "^5.28.0",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.11.45",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.7.4",
     "eslint": "^8.20.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
