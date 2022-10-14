@@ -29,7 +29,7 @@ describe('test Button component', () => {
     const element = wrapper.getByText('Nice');
     expect(element).toBeInTheDocument();
     expect(element.tagName).toEqual('BUTTON');
-    expect(element).toHaveClass('btn btn-default');
+    expect(element).toHaveClass('btn');
   });
 
   it('should render the correct component based on different props', () => {
