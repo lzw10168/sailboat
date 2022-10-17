@@ -87,3 +87,7 @@ components/
   
 ### other
 * 单个组件测试: `npm test -- -t "regular"`
+
+
+### CI/CD
+* travis-ci[https://travis-ci.com/]
