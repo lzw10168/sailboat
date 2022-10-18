@@ -47,8 +47,8 @@
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
-    "build-es": "rollup --config rollup.config.js",
-    "build-umd": "rollup --config rollup.umd.config.js",
+    "build-es": "rollup --config ./rollup/rollup.es.config.js",
+    "build-umd": "rollup --config ./rollup/rollup.umd.config.js",
     "prepublish": "npm run test:no-watch && npm run lint && npm run build"
   },
   "eslintConfig": {
