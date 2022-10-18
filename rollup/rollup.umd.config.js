@@ -19,7 +19,7 @@ export default {
     }
   ],
   plugins: [
-    ...baseconfig.plugins,
+    ...baseConfig.plugins,
     // 处理 ReferenceError: process is not defined 问题
     replace({
       'process.env.NODE_ENV': JSON.stringify('production')
